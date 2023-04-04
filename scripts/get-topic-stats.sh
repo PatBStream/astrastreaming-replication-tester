@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Define the path to your Java properties file
-#properties_file="../conf/config.properties"
 properties_file=$1
 
 # Read the properties file and parse its contents
@@ -42,9 +41,11 @@ done < "$properties_file"
 
 export BEARER_TOKEN=$PULSAR_SOURCE_JWT
 echo "Stats from $PULSAR_SOURCE_URL"
+echo ""
 if [ "$PULSAR_TOPIC_TYPE" == "partitioned" ]; then
     ./get-partitioned-stats.sh $PULSAR_SOURCE_URL $PULSAR_TENANT/$PULSAR_NAMESPACE/$PULSAR_TOPIC
 else
     ./get-nonpartitioned-stats.sh $PULSAR_SOURCE_URL $PULSAR_TENANT/$PULSAR_NAMESPACE/$PULSAR_TOPIC
 fi
+echo ""
 echo "Stats from $PULSAR_SOURCE_URL"
